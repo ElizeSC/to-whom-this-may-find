@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>To Whom It May Connect</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+</head>
+<body>
+
+<div id="envelope-overlay" onclick="start()">
+  <div class="envelope-box">
+    <div class="flap"></div>
+    <span>OPEN LETTER</span>
+  </div>
+</div>
+
+<div id="viewport">
+  <div id="world">
+    <div class="photo-card" style="top: 1000px; left: 1000px; transform: rotate(-2deg);"
+         onclick="show('img/myself.jpg', 'Me', 'The person behind the letter.')">
+      <img src="img/myself.jpg">
+    </div>
+
+    <div class="photo-card" style="top: 850px; left: 1150px; transform: rotate(4deg);"
+         onclick="show('img/album.jpg', 'Favorites', 'Current rotation.')">
+      <img src="img/album.jpg">
+    </div>
+
+  </div>
+</div>
+
+<div id="modal" onclick="hide()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <img id="m-img" src="">
+    <h2 id="m-title"></h2>
+    <p id="m-text"></p>
+    <button class="close-btn" onclick="hide()">Back to Desk</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

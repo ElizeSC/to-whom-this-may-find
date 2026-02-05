@@ -1,0 +1,71 @@
+/* Layout Basics */
+body, html {
+  margin: 0; padding: 0; width: 100%; height: 100%;
+  overflow: hidden; background-color: #f4f1ea; /* Warm paper color */
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Envelope Overlay */
+#envelope-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+  z-index: 1000; display: flex; justify-content: center; align-items: center;
+  cursor: pointer; transition: opacity 0.5s;
+}
+
+.envelope-box {
+  width: 280px; height: 180px; background: #e9dec4;
+  display: flex; justify-content: center; align-items: center;
+  border-bottom: 4px solid #d4c5ab; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  letter-spacing: 2px; font-weight: bold; color: #8b7d6b;
+}
+
+/* The Infinite Canvas */
+#viewport { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+
+#world {
+  width: 2000px; height: 2000px; position: absolute;
+  touch-action: none; cursor: grab;
+  transition: transform 0.1s ease-out;
+}
+
+/* The Photo Style */
+.photo-card {
+  position: absolute; width: 180px; padding: 10px 10px 35px 10px;
+  background: white; border: 1px solid #ddd;
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+  border-radius: 2px;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.photo-card:nth-child(even) {
+  padding-bottom: 50px;
+}
+
+.photo-card img { width: 100%; pointer-events: none; }
+
+.photo-card:hover {
+  z-index: 100 !important;
+  transform: scale(1.1) rotate(0deg) !important;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+/* The Details Modal */
+#modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+  z-index: 2000; display: none; justify-content: center; align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: white; width: 85%; max-width: 400px;
+  padding: 30px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.modal-content img { width: 100%; height: auto; margin-bottom: 20px; }
+
+.modal-content h2 { font-family: Georgia, serif; font-style: italic; }
+
+.close-btn {
+  margin-top: 20px; padding: 10px 20px; cursor: pointer;
+  background: #000; color: #fff; border: none;
+}
