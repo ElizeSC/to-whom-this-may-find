@@ -23,7 +23,7 @@ body, html {
 }
 
 .sticky-note {
-  background: #fffd91; /* Classic yellow sticky note color */
+  background: peachpuff;
   width: 90%;
   max-width: 450px;
   padding: 40px 30px;
@@ -32,7 +32,7 @@ body, html {
   transform: rotate(-2deg); /* Slightly tilted */
   font-family: 'MyHandwriting', cursive; /* Your custom font applied here */
   color: #333;
-  line-height: 1.4;
+  line-height: 1.25;
 }
 
 /* The "Washi Tape" effect on top */
@@ -56,7 +56,7 @@ body, html {
 .continue-btn {
   background: none;
   border: none;
-  color: #d63031;
+  color: hotpink;
   font-family: inherit;
   font-size: 1rem;
   cursor: pointer;
@@ -103,8 +103,9 @@ body, html {
 #viewport {
   width: 100vw;
   height: 100vh;
-  position: relative;
+  position: fixed;
   overflow: hidden;
+  touch-action: none;
   background-image: radial-gradient(#000000 1px, transparent 1px);
 }
 
@@ -138,23 +139,97 @@ body, html {
 
 /* The Details Modal */
 #modal {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-  z-index: 2000; display: none; justify-content: center; align-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10000; /* High z-index to stay on top */
+  display: none;
+  justify-content: center;
+  align-items: center;
   backdrop-filter: blur(5px);
+  padding: 20px;
 }
 
 .modal-content {
-  background: white; width: 85%; max-width: 400px;
-  padding: 30px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  background: white;
+  /* THE FIX: instead of a fixed width, it shrinks to fit the content */
+  width: fit-content;
+  max-width: 90vw; /* Keeps it from hitting screen edges on mobile */
+  max-height: 90vh;
+
+  padding: 20px; /* Reduced padding to make it look tighter */
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
 }
 
-.modal-content img { width: 100%; height: auto; margin-bottom: 20px; }
+#m-img {
+  /* THE FIX: Ensure the image dictates the width */
+  width: auto;
+  max-width: 100%;
+  max-height: 60vh; /* Gives the photo more room but keeps button visible */
+  height: auto;
+  display: block;
+  margin-bottom: 15px;
+  border-radius: 2px; /* Matches your polaroid feel */
+}
 
-.modal-content h2 { font-family: Georgia, serif; font-style: italic; }
+#m-title {
+  font-family: 'MyHandwriting', cursive;
+  font-size: 1.8rem;
+  margin: 5px 0;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.modal-content img {
+  width: auto;
+  max-width: 100%;
+  max-height: 40vh; /* Limits image height so button stays visible */
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+/* Use your custom font for the title and button */
+.modal-content h2, .close-btn {
+  font-family: 'MyHandwriting', cursive;
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  font-style: normal; /* Overriding the previous italic style */
+}
+
+.modal-content p {
+  font-family: 'MyHandwriting';
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
 
 .close-btn {
-  margin-top: 20px; padding: 10px 20px; cursor: pointer;
-  background: #000; color: #fff; border: none;
+  margin-top: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background: white;
+  color: #000;
+  border: 2px solid #000;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+  border-radius: 50px;
+}
+
+.close-btn:hover {
+  background: none;
+  color: hotpink;
+  transform: translateY(-3px);
+  border-radius: 50px;
+  box-shadow: 0 3px 0px hotpink; /* Matches your sticky note link color */
 }
 
 .cd-disc {
