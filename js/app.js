@@ -14,6 +14,23 @@ interact('#world').draggable({
   }
 });
 
+interact('#world').gesturable({
+  listeners: {
+    move(event) {
+      const world = document.getElementById('world');
+      const x = parseFloat(world.getAttribute('data-x')) || 0;
+      const y = parseFloat(world.getAttribute('data-y')) || 0;
+
+      scale = scale * (1 + event.ds);
+
+      // Limit the zoom so users don't get lost
+      scale = Math.max(0.5, Math.min(scale, 2));
+
+      updateTransform(world, x, y, scale);
+    }
+  }
+});
+
 // Helper function to handle all transforms in one place
 function updateTransform(target, x, y, s) {
   target.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
@@ -38,20 +55,22 @@ window.addEventListener('wheel', (e) => {
 
 // Start Function: Transitions from Envelope to Desk
 function start() {
-  document.getElementById('envelope-overlay').style.opacity = '0';
+  // Fades out the sticky note
+  const overlay = document.getElementById('intro-overlay');
+  overlay.style.opacity = '0';
+  overlay.style.transition = 'opacity 0.5s ease';
+
   setTimeout(() => {
-    document.getElementById('envelope-overlay').style.display = 'none';
+    overlay.style.display = 'none';
+
+    // World centering logic
+    const world = document.getElementById('world');
+    const cx = -(1000 - window.innerWidth / 2);
+    const cy = -(1000 - window.innerHeight / 2);
+    world.style.transform = `translate(${cx}px, ${cy}px) scale(1)`;
+    world.setAttribute('data-x', cx);
+    world.setAttribute('data-y', cy);
   }, 500);
-
-  const world = document.getElementById('world');
-
-  // Calculate center based on screen size
-  const x = -(1000 - window.innerWidth / 2);
-  const y = -(1000 - window.innerHeight / 2);
-
-  world.style.transform = `translate(${x}px, ${y}px)`;
-  world.setAttribute('data-x', x);
-  world.setAttribute('data-y', y);
 }
 
 // Modal View Controllers

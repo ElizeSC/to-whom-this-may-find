@@ -5,6 +5,86 @@ body, html {
   font-family: 'Courier New', Courier, monospace;
 }
 
+/* 1. Loading your custom font */
+@font-face {
+  font-family: 'MyHandwriting';
+  src: url('izzy_font_letters-Regular.woff2') format('truetype');
+}
+
+#intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* Dimmer desk background */
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sticky-note {
+  background: #fffd91; /* Classic yellow sticky note color */
+  width: 90%;
+  max-width: 450px;
+  padding: 40px 30px;
+  position: relative;
+  box-shadow: 5px 10px 30px rgba(0,0,0,0.2);
+  transform: rotate(-2deg); /* Slightly tilted */
+  font-family: 'MyHandwriting', cursive; /* Your custom font applied here */
+  color: #333;
+  line-height: 1.4;
+}
+
+/* The "Washi Tape" effect on top */
+.tape {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.note-content p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.continue-btn {
+  background: none;
+  border: none;
+  color: #d63031;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.continue-btn:hover {
+  font-weight: bold;
+}
+
+#world {
+  width: 2000px;
+  height: 2000px;
+  position: absolute;
+  touch-action: none;
+  cursor: grab;
+  transform-origin: center center;
+
+  /* THE DOT GRID */
+  background-color: #f4f1ea; /* Your desk color */
+  background-image: radial-gradient(#d1cfc8 1px, transparent 1px);
+  background-size: 20px 20px; /* This controls the distance between dots */
+}
+
 /* Envelope Overlay */
 #envelope-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.8);
@@ -25,6 +105,7 @@ body, html {
   height: 100vh;
   position: relative;
   overflow: hidden;
+  background-image: radial-gradient(#000000 1px, transparent 1px);
 }
 
 #world {
