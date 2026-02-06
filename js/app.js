@@ -87,3 +87,20 @@ function hide() {
   document.getElementById('modal').style.display = 'none';
   document.getElementById('viewport').style.filter = 'none';
 }
+
+// Add this to your script.js to make notes movable
+interact('.colored-note').draggable({
+  listeners: {
+    move (event) {
+      const target = event.target;
+      // Logical position tracking
+      const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+      const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+      // Update the element's style
+      target.style.transform = `translate(${x}px, ${y}px) rotate(${target.style.transform.split('rotate(')[1] || '0deg'}`;
+      target.setAttribute('data-x', x);
+      target.setAttribute('data-y', y);
+    }
+  }
+});
