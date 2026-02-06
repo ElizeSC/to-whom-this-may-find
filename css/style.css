@@ -31,6 +31,7 @@ body, html {
   width: 2000px; height: 2000px; position: absolute;
   touch-action: none; cursor: grab;
   transition: transform 0.1s ease-out;
+  transform-origin: center center;
 }
 
 /* The Photo Style */

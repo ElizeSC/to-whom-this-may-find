@@ -1,17 +1,40 @@
-// Setup Panning Physics
+let scale = 1; // 1 is normal size
+
 interact('#world').draggable({
   listeners: {
     move(event) {
       const target = event.target;
-      const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-      const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+      // We divide the movement by the scale so that dragging
+      // feels consistent even when zoomed in/out
+      const x = (parseFloat(target.getAttribute('data-x')) || 0) + (event.dx / scale);
+      const y = (parseFloat(target.getAttribute('data-y')) || 0) + (event.dy / scale);
 
-      target.style.transform = `translate(${x}px, ${y}px)`;
-      target.setAttribute('data-x', x);
-      target.setAttribute('data-y', y);
+      updateTransform(target, x, y, scale);
     }
   }
 });
+
+// Helper function to handle all transforms in one place
+function updateTransform(target, x, y, s) {
+  target.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+  target.setAttribute('data-x', x);
+  target.setAttribute('data-y', y);
+}
+
+// Add Scroll-to-Zoom (Desktop)
+window.addEventListener('wheel', (e) => {
+  const world = document.getElementById('world');
+  const x = parseFloat(world.getAttribute('data-x')) || 0;
+  const y = parseFloat(world.getAttribute('data-y')) || 0;
+
+  if (e.deltaY < 0) {
+    scale = Math.min(scale + 0.1, 2); // Zoom in (max 2x)
+  } else {
+    scale = Math.max(scale - 0.1, 0.5); // Zoom out (min 0.5x)
+  }
+
+  updateTransform(world, x, y, scale);
+}, { passive: false });
 
 // Start Function: Transitions from Envelope to Desk
 function start() {
