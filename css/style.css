@@ -323,11 +323,10 @@ body, html {
   color: #b5b3ad;
   font-family: 'MyHandwriting', cursive;
   font-size: 0.8rem;
-  pointer-events: none; /* User drags the desk "through" them */
+  pointer-events: none;
   z-index: 1;
 }
 
-/* Colored Sticky Notes */
 .colored-note {
   position: absolute;
   width: 150px;
@@ -343,7 +342,6 @@ body, html {
   justify-content: center;
 }
 
-/* Color Variants - Low saturation to keep it "aesthetic" */
 .note-blue   { background: #d4e8ff; transform: rotate(2deg); }
 .note-pink   { background: #ffd6e0; transform: rotate(-3deg); }
 .note-yellow { background: #fff9c4; transform: rotate(1deg); }
