@@ -23,7 +23,6 @@ interact('#world').gesturable({
 
       scale = scale * (1 + event.ds);
 
-      // Limit the zoom so users don't get lost
       scale = Math.max(0.5, Math.min(scale, 2));
 
       updateTransform(world, x, y, scale);
@@ -31,14 +30,12 @@ interact('#world').gesturable({
   }
 });
 
-// Helper function to handle all transforms in one place
 function updateTransform(target, x, y, s) {
   target.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
   target.setAttribute('data-x', x);
   target.setAttribute('data-y', y);
 }
 
-// Add Scroll-to-Zoom (Desktop)
 window.addEventListener('wheel', (e) => {
   const world = document.getElementById('world');
   const x = parseFloat(world.getAttribute('data-x')) || 0;
