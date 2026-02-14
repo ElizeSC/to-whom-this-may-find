@@ -68,6 +68,24 @@ function start() {
     world.setAttribute('data-x', cx);
     world.setAttribute('data-y', cy);
   }, 500);
+
+  const world = document.getElementById('world');
+
+  // Coordinates for the Header
+  const targetX = 1000;
+  const targetY = 450;
+
+  // Offset calculation for screen center
+  const centerX = -(targetX - window.innerWidth / 2);
+  const centerY = -(targetY - window.innerHeight / 2);
+
+  // Smooth "glide" into the desk
+  world.style.transition = "transform 1.8s cubic-bezier(0.19, 1, 0.22, 1)";
+  updateTransform(world, centerX, centerY, 1);
+
+  // Update global drag variables
+  currentX = centerX;
+  currentY = centerY;
 }
 
 // Modal View Controllers

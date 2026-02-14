@@ -152,37 +152,45 @@ body, html {
 
 .modal-content {
   background: white;
-  /* THE FIX: instead of a fixed width, it shrinks to fit the content */
+  /* THE FIX: box only gets as wide as the image inside it */
   width: fit-content;
-  max-width: 90vw; /* Keeps it from hitting screen edges on mobile */
-  max-height: 90vh;
-
-  padding: 20px; /* Reduced padding to make it look tighter */
+  max-width: 85vw; /* Keeps it from touching screen edges on mobile */
+  max-height: 85vh;
+  padding: 20px;
   text-align: center;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
 }
 
 #m-img {
-  /* THE FIX: Ensure the image dictates the width */
+  /* THE FIX: Image width determines the container width */
   width: auto;
   max-width: 100%;
-  max-height: 60vh; /* Gives the photo more room but keeps button visible */
+  max-height: 50vh;
   height: auto;
   display: block;
   margin-bottom: 15px;
-  border-radius: 2px; /* Matches your polaroid feel */
 }
 
 #m-title {
   font-family: 'MyHandwriting', cursive;
-  font-size: 1.8rem;
-  margin: 5px 0;
+  font-size: 1.6rem;
+  margin: 10px 0 5px 0;
+  /* THE FIX: text wraps based on the width of the image above it */
   width: 100%;
-  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+#m-text {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #555;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .modal-content img {
@@ -222,6 +230,8 @@ body, html {
   font-size: 1.2rem;
   transition: all 0.2s;
   border-radius: 50px;
+  width: fit-content;
+  align-self: center;
 }
 
 .close-btn:hover {
@@ -340,6 +350,60 @@ body, html {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+#desk-header {
+  position: absolute;
+  /* Center of your 2000px world */
+  top: 450px;
+  left: 1000px;
+  transform: translate(-50%, -50%) rotate(-2deg); /* The "tilted" look */
+  text-align: center;
+  width: fit-content;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pink-marker {
+  font-family: 'MyHandwriting', cursive;
+  color: #ff007f; /* Neon Pink */
+  font-size: clamp(3.5rem, 15vw, 6rem); /* Scales for mobile */
+  margin: 0;
+  line-height: 0.9;
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.2); /* Subtle glow */
+}
+
+.underline {
+  height: 5px;
+  background-color: #ff007f;
+  width: 100%;
+  margin: 8px auto 0;
+  border-radius: 20% 80% 20% 80%; /* Messy hand-drawn ends */
+}
+
+.underline.short {
+  width: 70%;
+  margin-top: 5px;
+  height: 4px;
+}
+
+.ig-handle, .instruction {
+  font-family: 'MyHandwriting', cursive;
+  color: #ff007f;
+}
+
+.ig-handle {
+  font-size: 1.8rem;
+  margin-top: 15px;
+  letter-spacing: 1px;
+}
+
+.instruction {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  opacity: 0.8;
+  max-width: 300px; /* Keeps text from getting too long on desktop */
+  line-height: 1.2;
 }
 
 .note-blue   { background: #d4e8ff; transform: rotate(2deg); }
